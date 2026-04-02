@@ -269,7 +269,7 @@ function App() {
                 <span>View Code</span>
               </a>
               <a
-                href="https://forum-chi-eight.vercel.app/"
+                href="https://exbo.site"
                 className="btn"
                 target="_blank"
                 rel="noopener"
