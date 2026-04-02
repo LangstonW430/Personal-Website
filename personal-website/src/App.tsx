@@ -1,4 +1,5 @@
 import { useEffect } from "react";
+import { Analytics } from "@vercel/analytics/next";
 import headshotImg from "./assets/Enhanced Headshot.jpg";
 import resumePDF from "./assets/CS_Resume.pdf";
 import "./App.css";
@@ -428,6 +429,8 @@ function App() {
         <p>© 2026 Langston Woods</p>
         <p>CS @ University of Rochester · Class of 2029</p>
       </footer>
+
+      <Analytics />
     </>
   );
 }
