@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { Analytics } from "@vercel/analytics/next";
+import { Analytics } from "@vercel/analytics/react";
 import headshotImg from "./assets/Enhanced Headshot.jpg";
 import resumePDF from "./assets/CS_Resume.pdf";
 import "./App.css";
