@@ -1,0 +1,8 @@
+{
+  "rewrites": [
+    {
+      "source": "/music-tracker/:path*",
+      "destination": "https://music-tracker-zeta.vercel.app/:path*"
+    }
+  ]
+}
