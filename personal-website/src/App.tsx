@@ -280,6 +280,44 @@ function App() {
             </div>
             <div className="project-date">Ongoing</div>
           </div>
+
+          <div className="project-card reveal">
+            <div className="project-num">04</div>
+            <div className="project-tags">
+              <span className="tag">TypeScript</span>
+              <span className="tag">React</span>
+              <span className="tag">Supabase</span>
+              <span className="tag">Vite</span>
+              <span className="tag">CSS</span>
+            </div>
+            <h3>Music Tracker</h3>
+            <p>
+              A full-stack web app for tracking and discovering music, built
+              with React and TypeScript on the frontend and Supabase for
+              authentication and database persistence. Features a personal
+              dashboard for logging listening history and managing your music
+              library. Deployed on Vercel.
+            </p>
+            <div className="project-links">
+              <a
+                href="https://github.com/LangstonW430/music-tracker"
+                className="btn"
+                target="_blank"
+                rel="noopener"
+              >
+                <span>View Code</span>
+              </a>
+              <a
+                href="https://music-tracker.langstonwoods.com/dashboard"
+                className="btn"
+                target="_blank"
+                rel="noopener"
+              >
+                <span>View Live Site</span>
+              </a>
+            </div>
+            <div className="project-date">Ongoing</div>
+          </div>
         </div>
       </section>
 
