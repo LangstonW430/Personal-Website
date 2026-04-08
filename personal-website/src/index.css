@@ -660,6 +660,98 @@ section {
     text-align: right;
 }
 
+/* ── HIRE ME ── */
+#hire { background: var(--ink); }
+
+#hire .section-label { color: var(--rust); }
+#hire .section-label::after { background: rgba(196, 80, 10, 0.3); }
+
+.hire-layout {
+    display: grid;
+    grid-template-columns: 1fr 1.6fr;
+    gap: 80px;
+    align-items: start;
+}
+
+.hire-intro h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(36px, 4vw, 56px);
+    font-weight: 700;
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+    color: var(--cream);
+    margin-bottom: 28px;
+}
+
+.hire-intro h2 em {
+    font-style: italic;
+    color: var(--rust);
+}
+
+.hire-intro p {
+    font-size: 15px;
+    line-height: 1.8;
+    color: rgba(245, 240, 232, 0.55);
+    margin-bottom: 40px;
+    max-width: 340px;
+}
+
+.hire-services {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.service-item {
+    display: grid;
+    grid-template-columns: 56px 1fr;
+    gap: 28px;
+    padding: 36px 40px;
+    background: #221c16;
+    position: relative;
+    overflow: hidden;
+    transition: background 0.3s;
+}
+
+.service-item:hover { background: #2a221a; }
+
+.service-item::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 3px;
+    height: 0;
+    background: var(--rust);
+    transition: height 0.4s ease;
+}
+
+.service-item:hover::before { height: 100%; }
+
+.service-icon {
+    font-family: 'Playfair Display', serif;
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--rust);
+    letter-spacing: 0.05em;
+    padding-top: 4px;
+}
+
+.service-body h4 {
+    font-family: 'Playfair Display', serif;
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--cream);
+    margin-bottom: 12px;
+    letter-spacing: -0.01em;
+}
+
+.service-body p {
+    font-size: 14px;
+    line-height: 1.75;
+    color: rgba(245, 240, 232, 0.5);
+}
+
 /* ── CONTACT ── */
 #contact {
     background: var(--ink);
@@ -801,6 +893,19 @@ footer p {
 
     .edu-card { grid-template-columns: 1fr; }
     .edu-gpa-block { align-items: flex-start; }
+
+    .hire-layout {
+        grid-template-columns: 1fr;
+        gap: 48px;
+    }
+
+    .hire-intro p { max-width: 100%; }
+
+    .service-item {
+        grid-template-columns: 40px 1fr;
+        gap: 20px;
+        padding: 28px 20px;
+    }
 
     footer {
         flex-direction: column;

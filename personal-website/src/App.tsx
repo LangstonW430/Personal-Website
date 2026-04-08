@@ -46,6 +46,9 @@ function App() {
             <a href="#skills">Skills</a>
           </li>
           <li>
+            <a href="#hire">Hire Me</a>
+          </li>
+          <li>
             <a href="#contact">Contact</a>
           </li>
         </ul>
@@ -420,6 +423,68 @@ function App() {
           <div className="edu-gpa-block">
             <span className="gpa-num">3.5</span>
             <span className="gpa-label">GPA</span>
+          </div>
+        </div>
+      </section>
+
+      {/* HIRE ME */}
+      <section id="hire">
+        <div className="section-label">Freelance Work</div>
+        <div className="hire-layout">
+          <div className="hire-intro reveal">
+            <h2>
+              Let's build
+              <br />
+              <em>something great</em>
+            </h2>
+            <p>
+              Available for freelance projects. Whether you need a polished web
+              app, a custom desktop tool, or general software development, I
+              deliver clean, reliable solutions tailored to your needs.
+            </p>
+            <a href="mailto:langstonw430@gmail.com" className="btn btn-filled">
+              <span>Get a Quote</span>
+            </a>
+          </div>
+
+          <div className="hire-services reveal">
+            <div className="service-item">
+              <div className="service-icon">01</div>
+              <div className="service-body">
+                <h4>Full-Stack Web Development</h4>
+                <p>
+                  End-to-end web applications built with modern stacks — React,
+                  Next.js, TypeScript, Node.js, and PostgreSQL/Supabase. From
+                  landing pages to full-featured platforms with auth, databases,
+                  and API integrations.
+                </p>
+              </div>
+            </div>
+
+            <div className="service-item">
+              <div className="service-icon">02</div>
+              <div className="service-body">
+                <h4>Desktop Applications</h4>
+                <p>
+                  Custom desktop software for Windows and cross-platform
+                  environments. GUI productivity tools, automation utilities, and
+                  data management apps built with Python and other native
+                  toolkits.
+                </p>
+              </div>
+            </div>
+
+            <div className="service-item">
+              <div className="service-icon">03</div>
+              <div className="service-body">
+                <h4>General Software Development</h4>
+                <p>
+                  Scripts, automation, data processing pipelines, CLI tools, and
+                  anything in between. If you have a software problem, I can
+                  build a solution — reliable, maintainable, and well-documented.
+                </p>
+              </div>
+            </div>
           </div>
         </div>
       </section>
