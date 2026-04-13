@@ -1,4 +1,5 @@
 import { useEffect } from "react";
+import { Link } from "react-router-dom";
 import { Analytics } from "@vercel/analytics/react";
 import headshotImg from "./assets/Enhanced Headshot.jpg";
 import resumePDF from "./assets/CS_Resume.pdf";
@@ -190,25 +191,43 @@ function App() {
           <div className="project-card reveal">
             <div className="project-num">01</div>
             <div className="project-tags">
-              <span className="tag">Python</span>
-              <span className="tag">Tkinter</span>
-              <span className="tag">JSON</span>
+              <span className="tag">TypeScript</span>
+              <span className="tag">React</span>
+              <span className="tag">PostgreSQL</span>
+              <span className="tag">Next.js</span>
+              <span className="tag">CSS</span>
             </div>
             <h3>
-              <a
-                href="https://github.com/LangstonW430/todo-list-app"
-                target="_blank"
-                rel="noopener"
-              >
-                To-Do List Desktop Application
+              <a href="https://exbo.site" target="_blank" rel="noopener">
+                Exbo - Community Forum Website
               </a>
             </h3>
             <p>
-              A GUI productivity app with persistent JSON-backed storage,
-              modular three-class architecture, and features including editing,
-              completion tracking, and optional due dates.
+              A full-stack web application built with Next.js and TypeScript,
+              featuring user authentication, real-time discussion threads, and
+              community engagement tools. Includes account creation, posting
+              capabilities, and a responsive design for seamless user
+              experience. Backend powered by PostgreSQL for data persistence.
             </p>
-            <div className="project-date">Nov – Dec 2025</div>
+            <div className="project-links">
+              <a
+                href="https://github.com/LangstonW430/Forum/tree/main/forum"
+                className="btn"
+                target="_blank"
+                rel="noopener"
+              >
+                <span>View Code</span>
+              </a>
+              <a
+                href="https://exbo.site"
+                className="btn"
+                target="_blank"
+                rel="noopener"
+              >
+                <span>View Live Site</span>
+              </a>
+            </div>
+            <div className="project-date">2025</div>
           </div>
 
           <div className="project-card reveal">
@@ -238,34 +257,37 @@ function App() {
             <div className="project-date">Dec 2025</div>
           </div>
         </div>
+        <div className="projects-cta reveal">
+          <Link to="/projects" className="btn btn-outline-cream">
+            <span>View All Projects</span>
+          </Link>
+        </div>
       </section>
 
       {/* WHAT I'M WORKING ON */}
       <section id="working-on">
         <div className="section-label">What I'm Working On</div>
 
-        <div className="projects-grid">
-          <div className="project-card reveal">
+        <div className="projects-grid reveal">
+          <div className="project-card">
             <div className="project-num">03</div>
             <div className="project-tags">
               <span className="tag">TypeScript</span>
               <span className="tag">React</span>
-              <span className="tag">PostgreSQL</span>
-              <span className="tag">Next.js</span>
+              <span className="tag">Sanity CMS</span>
+              <span className="tag">Vite</span>
               <span className="tag">CSS</span>
             </div>
-            <h3>Exbo - Community Forum Website</h3>
+            <h3>Mock Bakery</h3>
             <p>
-              A full-stack web application built with Next.js and TypeScript,
-              featuring user authentication, real-time discussion threads, and
-              community engagement tools. Includes account creation, posting
-              capabilities, and a responsive design for seamless user
-              experience. Backend powered by PostgreSQL for data persistence and
-              React Router for navigation. Currently deployed on Vercel.
+              A demo bakery website powered by a headless CMS. Products,
+              testimonials, and all page content are managed through Sanity v3
+              with real-time updates — no redeploy needed to change content.
+              Built with React 19 and TypeScript, deployed on Vercel.
             </p>
             <div className="project-links">
               <a
-                href="https://github.com/LangstonW430/Forum/tree/main/forum"
+                href="https://github.com/LangstonW430/Mock-Bakery"
                 className="btn"
                 target="_blank"
                 rel="noopener"
@@ -273,7 +295,7 @@ function App() {
                 <span>View Code</span>
               </a>
               <a
-                href="https://exbo.site"
+                href="https://mock-bakery.langstonwoods.com"
                 className="btn"
                 target="_blank"
                 rel="noopener"
@@ -284,7 +306,7 @@ function App() {
             <div className="project-date">Ongoing</div>
           </div>
 
-          <div className="project-card reveal">
+          <div className="project-card">
             <div className="project-num">04</div>
             <div className="project-tags">
               <span className="tag">TypeScript</span>
@@ -467,8 +489,8 @@ function App() {
                 <h4>Desktop Applications</h4>
                 <p>
                   Custom desktop software for Windows and cross-platform
-                  environments. GUI productivity tools, automation utilities, and
-                  data management apps built with Python and other native
+                  environments. GUI productivity tools, automation utilities,
+                  and data management apps built with Python and other native
                   toolkits.
                 </p>
               </div>
@@ -481,7 +503,8 @@ function App() {
                 <p>
                   Scripts, automation, data processing pipelines, CLI tools, and
                   anything in between. If you have a software problem, I can
-                  build a solution — reliable, maintainable, and well-documented.
+                  build a solution — reliable, maintainable, and
+                  well-documented.
                 </p>
               </div>
             </div>
