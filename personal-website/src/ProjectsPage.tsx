@@ -49,6 +49,17 @@ const projects = [
   },
   {
     num: "05",
+    title: "Mock Landscaper",
+    subtitle: "Service Business Demo Site",
+    description:
+      "A demo landscaping business website built with React, TypeScript, and Tailwind CSS. Clean service-focused layout showcasing offerings, testimonials, and contact information — demonstrating a modern small-business web presence.",
+    tags: ["TypeScript", "React", "Tailwind CSS", "Vite"],
+    github: "https://github.com/LangstonW430/mock-landscaper",
+    live: "https://mock-landscaper.vercel.app",
+    date: "Ongoing",
+  },
+  {
+    num: "06",
     title: "Sentence Tone Classifier",
     subtitle: "ML Emotion Classifier",
     description:
