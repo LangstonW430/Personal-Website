@@ -464,9 +464,19 @@ function App() {
               app, a custom desktop tool, or general software development, I
               deliver clean, reliable solutions tailored to your needs.
             </p>
-            <a href="mailto:langstonw430@gmail.com" className="btn btn-filled">
-              <span>Get a Quote</span>
-            </a>
+            <div className="hire-cta-row">
+              <a href="mailto:langstonw430@gmail.com" className="btn btn-filled">
+                <span>Get a Quote</span>
+              </a>
+              <a
+                href="https://services.langstonwoods.com"
+                className="btn btn-outline-cream"
+                target="_blank"
+                rel="noopener"
+              >
+                <span>View Services</span>
+              </a>
+            </div>
           </div>
 
           <div className="hire-services reveal">

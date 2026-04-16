@@ -863,6 +863,12 @@ section {
     max-width: 340px;
 }
 
+.hire-cta-row {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+}
+
 .hire-services {
     display: flex;
     flex-direction: column;
