@@ -1,4 +1,5 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
+import { useReveal } from "./hooks/useReveal";
 import { Link } from "react-router-dom";
 import { Analytics } from "@vercel/analytics/react";
 import headshotImg from "./assets/Enhanced Headshot.jpg";
@@ -27,22 +28,7 @@ function App() {
       .finally(() => setLoading(false));
   }, []);
 
-  useEffect(() => {
-    const reveals = document.querySelectorAll(".reveal");
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry, i) => {
-          if (entry.isIntersecting) {
-            setTimeout(() => entry.target.classList.add("visible"), i * 80);
-            observer.unobserve(entry.target);
-          }
-        });
-      },
-      { threshold: 0.1 },
-    );
-    reveals.forEach((el) => observer.observe(el));
-    return () => observer.disconnect();
-  }, [featuredProjects, workingOnProjects]);
+  useReveal([featuredProjects, workingOnProjects]);
 
   return (
     <>

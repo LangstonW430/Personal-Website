@@ -1,4 +1,5 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
+import { useReveal } from "./hooks/useReveal";
 import { Link } from "react-router-dom";
 import { Analytics } from "@vercel/analytics/react";
 import { client } from "./sanity/client";
@@ -22,22 +23,7 @@ export default function ProjectsPage() {
       .finally(() => setLoading(false));
   }, []);
 
-  useEffect(() => {
-    const reveals = document.querySelectorAll(".reveal");
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry, i) => {
-          if (entry.isIntersecting) {
-            setTimeout(() => entry.target.classList.add("visible"), i * 80);
-            observer.unobserve(entry.target);
-          }
-        });
-      },
-      { threshold: 0.1 },
-    );
-    reveals.forEach((el) => observer.observe(el));
-    return () => observer.disconnect();
-  }, [projects]);
+  useReveal([projects]);
 
   return (
     <>
