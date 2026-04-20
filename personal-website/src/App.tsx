@@ -14,6 +14,7 @@ function App() {
   const [workingOnProjects, setWorkingOnProjects] = useState<Project[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
 
   useEffect(() => {
     Promise.all([
@@ -31,32 +32,26 @@ function App() {
   return (
     <>
       {/* NAV */}
-      <nav>
+      <nav className={menuOpen ? "nav-open" : ""}>
         <a href="#" className="nav-logo">
           L<span>.</span>Woods
         </a>
-        <ul className="nav-links">
-          <li>
-            <a href="#about">About</a>
-          </li>
-          <li>
-            <a href="#experience">Experience</a>
-          </li>
-          <li>
-            <a href="#projects">Projects</a>
-          </li>
-          <li>
-            <a href="#working-on">What I'm Working On</a>
-          </li>
-          <li>
-            <a href="#skills">Skills</a>
-          </li>
-          <li>
-            <a href="#hire">Hire Me</a>
-          </li>
-          <li>
-            <a href="#contact">Contact</a>
-          </li>
+        <button
+          className="nav-hamburger"
+          aria-label={menuOpen ? "Close menu" : "Open menu"}
+          aria-expanded={menuOpen}
+          onClick={() => setMenuOpen((o) => !o)}
+        >
+          <span /><span /><span />
+        </button>
+        <ul className="nav-links" onClick={() => setMenuOpen(false)}>
+          <li><a href="#about">About</a></li>
+          <li><a href="#experience">Experience</a></li>
+          <li><a href="#projects">Projects</a></li>
+          <li><a href="#working-on">What I'm Working On</a></li>
+          <li><a href="#skills">Skills</a></li>
+          <li><a href="#hire">Hire Me</a></li>
+          <li><a href="#contact">Contact</a></li>
         </ul>
       </nav>
 

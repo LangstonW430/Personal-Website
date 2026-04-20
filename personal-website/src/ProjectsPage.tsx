@@ -10,6 +10,7 @@ export default function ProjectsPage() {
   const [projects, setProjects] = useState<Project[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -25,20 +26,22 @@ export default function ProjectsPage() {
 
   return (
     <>
-      <nav>
+      <nav className={menuOpen ? "nav-open" : ""}>
         <Link to="/" className="nav-logo">
           L<span>.</span>Woods
         </Link>
-        <ul className="nav-links">
-          <li>
-            <Link to="/#about">About</Link>
-          </li>
-          <li>
-            <Link to="/#projects">Projects</Link>
-          </li>
-          <li>
-            <Link to="/#contact">Contact</Link>
-          </li>
+        <button
+          className="nav-hamburger"
+          aria-label={menuOpen ? "Close menu" : "Open menu"}
+          aria-expanded={menuOpen}
+          onClick={() => setMenuOpen((o) => !o)}
+        >
+          <span /><span /><span />
+        </button>
+        <ul className="nav-links" onClick={() => setMenuOpen(false)}>
+          <li><Link to="/#about">About</Link></li>
+          <li><Link to="/#projects">Projects</Link></li>
+          <li><Link to="/#contact">Contact</Link></li>
         </ul>
       </nav>
 
