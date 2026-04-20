@@ -60,6 +60,17 @@ const projects = [
   },
   {
     num: "06",
+    title: "CollabDocs",
+    subtitle: "Real-Time Collaborative Editor",
+    description:
+      "A real-time collaborative document editor where multiple users can work simultaneously on shared documents. Built with Next.js 15 and TypeScript, powered by Convex for live data sync and authentication, with a rich editing experience via TipTap.",
+    tags: ["TypeScript", "Next.js", "Convex", "TipTap", "Tailwind CSS"],
+    github: "https://github.com/LangstonW430/collaboration-app",
+    live: null,
+    date: "Ongoing",
+  },
+  {
+    num: "07",
     title: "Sentence Tone Classifier",
     subtitle: "ML Emotion Classifier",
     description:

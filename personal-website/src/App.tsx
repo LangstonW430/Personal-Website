@@ -270,75 +270,29 @@ function App() {
 
         <div className="projects-grid reveal">
           <div className="project-card">
-            <div className="project-num">03</div>
+            <div className="project-num">01</div>
             <div className="project-tags">
               <span className="tag">TypeScript</span>
-              <span className="tag">React</span>
-              <span className="tag">Sanity CMS</span>
-              <span className="tag">Vite</span>
-              <span className="tag">CSS</span>
+              <span className="tag">Next.js</span>
+              <span className="tag">Convex</span>
+              <span className="tag">TipTap</span>
+              <span className="tag">Tailwind CSS</span>
             </div>
-            <h3>Mock Bakery</h3>
+            <h3>CollabDocs</h3>
             <p>
-              A demo bakery website powered by a headless CMS. Products,
-              testimonials, and all page content are managed through Sanity v3
-              with real-time updates — no redeploy needed to change content.
-              Built with React 19 and TypeScript, deployed on Vercel.
+              A real-time collaborative document editor where multiple users can
+              work simultaneously on shared documents. Built with Next.js 15 and
+              TypeScript, powered by Convex for live data sync and
+              authentication, with a rich editing experience via TipTap.
             </p>
             <div className="project-links">
               <a
-                href="https://github.com/LangstonW430/Mock-Bakery"
+                href="https://github.com/LangstonW430/collaboration-app"
                 className="btn"
                 target="_blank"
                 rel="noopener"
               >
                 <span>View Code</span>
-              </a>
-              <a
-                href="https://mock-bakery.langstonwoods.com"
-                className="btn"
-                target="_blank"
-                rel="noopener"
-              >
-                <span>View Live Site</span>
-              </a>
-            </div>
-            <div className="project-date">Ongoing</div>
-          </div>
-
-          <div className="project-card">
-            <div className="project-num">04</div>
-            <div className="project-tags">
-              <span className="tag">TypeScript</span>
-              <span className="tag">React</span>
-              <span className="tag">Supabase</span>
-              <span className="tag">Vite</span>
-              <span className="tag">CSS</span>
-            </div>
-            <h3>Music Tracker</h3>
-            <p>
-              A full-stack web app for tracking and discovering music, built
-              with React and TypeScript on the frontend and Supabase for
-              authentication and database persistence. Features a personal
-              dashboard for logging listening history and managing your music
-              library. Deployed on Vercel.
-            </p>
-            <div className="project-links">
-              <a
-                href="https://github.com/LangstonW430/music-tracker"
-                className="btn"
-                target="_blank"
-                rel="noopener"
-              >
-                <span>View Code</span>
-              </a>
-              <a
-                href="https://music-tracker.langstonwoods.com/dashboard"
-                className="btn"
-                target="_blank"
-                rel="noopener"
-              >
-                <span>View Live Site</span>
               </a>
             </div>
             <div className="project-date">Ongoing</div>
