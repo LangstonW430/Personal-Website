@@ -7,13 +7,19 @@ import type { Project } from "./sanity/types";
 
 export default function ProjectsPage() {
   const [projects, setProjects] = useState<Project[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(false);
 
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
 
   useEffect(() => {
-    client.fetch<Project[]>(allProjectsQuery).then(setProjects);
+    client
+      .fetch<Project[]>(allProjectsQuery)
+      .then(setProjects)
+      .catch(() => setError(true))
+      .finally(() => setLoading(false));
   }, []);
 
   useEffect(() => {
@@ -64,6 +70,8 @@ export default function ProjectsPage() {
         </div>
 
         <div className="all-projects-list">
+          {loading && <p className="fetch-status">Loading projects…</p>}
+          {error && <p className="fetch-status fetch-error">Could not load projects. Please try again later.</p>}
           {projects.map((p) => (
             <div key={p._id} className="ap-card reveal">
               <div className="ap-num">{p.num}</div>
@@ -78,7 +86,7 @@ export default function ProjectsPage() {
                       href={p.github}
                       className="btn"
                       target="_blank"
-                      rel="noopener"
+                      rel="noopener noreferrer"
                     >
                       <span>GitHub</span>
                     </a>
@@ -87,7 +95,7 @@ export default function ProjectsPage() {
                         href={p.live}
                         className="btn btn-filled"
                         target="_blank"
-                        rel="noopener"
+                        rel="noopener noreferrer"
                       >
                         <span>Live Site</span>
                       </a>

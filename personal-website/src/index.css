@@ -1102,3 +1102,13 @@ footer p {
 
     .ap-links { justify-content: flex-start; }
 }
+
+.fetch-status {
+  grid-column: 1 / -1;
+  text-align: center;
+  padding: 40px 0;
+  opacity: 0.6;
+  font-size: 0.95rem;
+}
+
+.fetch-error { color: #e05c5c; opacity: 1; }

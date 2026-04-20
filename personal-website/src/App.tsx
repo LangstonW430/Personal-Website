@@ -11,10 +11,20 @@ import type { Project } from "./sanity/types";
 function App() {
   const [featuredProjects, setFeaturedProjects] = useState<Project[]>([]);
   const [workingOnProjects, setWorkingOnProjects] = useState<Project[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(false);
 
   useEffect(() => {
-    client.fetch<Project[]>(featuredProjectsQuery).then(setFeaturedProjects);
-    client.fetch<Project[]>(workingOnQuery).then(setWorkingOnProjects);
+    Promise.all([
+      client.fetch<Project[]>(featuredProjectsQuery),
+      client.fetch<Project[]>(workingOnQuery),
+    ])
+      .then(([featured, working]) => {
+        setFeaturedProjects(featured);
+        setWorkingOnProjects(working);
+      })
+      .catch(() => setError(true))
+      .finally(() => setLoading(false));
   }, []);
 
   useEffect(() => {
@@ -199,6 +209,8 @@ function App() {
         <div className="section-label">Projects</div>
 
         <div className="projects-grid">
+          {loading && <p className="fetch-status">Loading projects…</p>}
+          {error && <p className="fetch-status fetch-error">Could not load projects. Please try again later.</p>}
           {featuredProjects.map((p, i) => {
             const codeHref = p.featuredGithub || p.github;
             const displayNum = (i + 1).toString().padStart(2, "0");
@@ -216,7 +228,7 @@ function App() {
                   <a
                     href={p.live || codeHref}
                     target="_blank"
-                    rel="noopener"
+                    rel="noopener noreferrer"
                   >
                     {p.title} — {p.subtitle}
                   </a>
@@ -228,7 +240,7 @@ function App() {
                       href={codeHref}
                       className="btn"
                       target="_blank"
-                      rel="noopener"
+                      rel="noopener noreferrer"
                     >
                       <span>View Code</span>
                     </a>
@@ -238,7 +250,7 @@ function App() {
                       href={p.live}
                       className="btn"
                       target="_blank"
-                      rel="noopener"
+                      rel="noopener noreferrer"
                     >
                       <span>View Live Site</span>
                     </a>
@@ -261,6 +273,8 @@ function App() {
         <div className="section-label">What I'm Working On</div>
 
         <div className="projects-grid reveal">
+          {loading && <p className="fetch-status">Loading projects…</p>}
+          {error && <p className="fetch-status fetch-error">Could not load projects. Please try again later.</p>}
           {workingOnProjects.map((p, i) => {
             const displayNum = (i + 1).toString().padStart(2, "0");
             return (
@@ -281,7 +295,7 @@ function App() {
                       href={p.github}
                       className="btn"
                       target="_blank"
-                      rel="noopener"
+                      rel="noopener noreferrer"
                     >
                       <span>View Code</span>
                     </a>
@@ -291,7 +305,7 @@ function App() {
                       href={p.live}
                       className="btn"
                       target="_blank"
-                      rel="noopener"
+                      rel="noopener noreferrer"
                     >
                       <span>View Live Site</span>
                     </a>
@@ -430,7 +444,7 @@ function App() {
                 href="https://services.langstonwoods.com"
                 className="btn btn-outline-cream"
                 target="_blank"
-                rel="noopener"
+                rel="noopener noreferrer"
               >
                 <span>View Services</span>
               </a>
@@ -497,7 +511,7 @@ function App() {
             href="https://www.linkedin.com/in/langston-woods-16b7682b4/"
             className="btn"
             target="_blank"
-            rel="noopener"
+            rel="noopener noreferrer"
           >
             <span>LinkedIn</span>
           </a>
@@ -505,11 +519,11 @@ function App() {
             href="https://github.com/LangstonW430"
             className="btn"
             target="_blank"
-            rel="noopener"
+            rel="noopener noreferrer"
           >
             <span>GitHub</span>
           </a>
-          <a href={resumePDF} className="btn" target="_blank" rel="noopener">
+          <a href={resumePDF} className="btn" target="_blank" rel="noopener noreferrer">
             <span>Resume</span>
           </a>
         </div>
