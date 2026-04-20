@@ -1,90 +1,22 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { Analytics } from "@vercel/analytics/react";
-
-const projects = [
-  {
-    num: "01",
-    title: "Exbo",
-    subtitle: "Community Forum Website",
-    description:
-      "A full-stack web application built with Next.js and TypeScript, featuring user authentication, real-time discussion threads, and community engagement tools. Includes account creation, posting capabilities, and a responsive design for seamless user experience. Backend powered by PostgreSQL for data persistence.",
-    tags: ["TypeScript", "React", "Next.js", "PostgreSQL", "CSS"],
-    github: "https://github.com/LangstonW430/Forum",
-    live: "https://exbo.site",
-    date: "2026",
-  },
-  {
-    num: "02",
-    title: "Music Tracker",
-    subtitle: "Personal Music Dashboard",
-    description:
-      "A full-stack web app for tracking and discovering music, built with React and TypeScript on the frontend and Supabase for authentication and database persistence. Features a personal dashboard for logging listening history and managing your music library.",
-    tags: ["TypeScript", "React", "Supabase", "Vite", "CSS"],
-    github: "https://github.com/LangstonW430/music-tracker",
-    live: "https://music-tracker.langstonwoods.com/dashboard",
-    date: "Ongoing",
-  },
-  {
-    num: "03",
-    title: "Mock Bakery",
-    subtitle: "Headless CMS Demo Site",
-    description:
-      "A demo bakery website powered by a headless CMS. Products, testimonials, and all page content are managed through Sanity v3 with real-time updates — no redeploy needed to change content. Built with React 19 and TypeScript.",
-    tags: ["TypeScript", "React", "Sanity CMS", "Vite", "CSS"],
-    github: "https://github.com/LangstonW430/Mock-Bakery",
-    live: "https://mock-bakery.langstonwoods.com",
-    date: "Ongoing",
-  },
-  {
-    num: "04",
-    title: "Personal Website",
-    subtitle: "This Site",
-    description:
-      "My personal portfolio site built with React and TypeScript. Features smooth scroll animations, an intersection-observer-driven reveal system, and a cohesive editorial design system built entirely in vanilla CSS.",
-    tags: ["TypeScript", "React", "Vite", "CSS"],
-    github: "https://github.com/LangstonW430/Personal-Website",
-    live: "https://langstonwoods.com",
-    date: "2026",
-  },
-  {
-    num: "05",
-    title: "Mock Landscaper",
-    subtitle: "Service Business Demo Site",
-    description:
-      "A demo landscaping business website built with React, TypeScript, and Tailwind CSS. Clean service-focused layout showcasing offerings, testimonials, and contact information — demonstrating a modern small-business web presence.",
-    tags: ["TypeScript", "React", "Tailwind CSS", "Vite"],
-    github: "https://github.com/LangstonW430/mock-landscaper",
-    live: "https://mock-landscaper.vercel.app",
-    date: "Ongoing",
-  },
-  {
-    num: "06",
-    title: "CollabDocs",
-    subtitle: "Real-Time Collaborative Editor",
-    description:
-      "A real-time collaborative document editor where multiple users can work simultaneously on shared documents. Built with Next.js 15 and TypeScript, powered by Convex for live data sync and authentication, with a rich editing experience via TipTap.",
-    tags: ["TypeScript", "Next.js", "Convex", "TipTap", "Tailwind CSS"],
-    github: "https://github.com/LangstonW430/collaboration-app",
-    live: null,
-    date: "Ongoing",
-  },
-  {
-    num: "07",
-    title: "Sentence Tone Classifier",
-    subtitle: "ML Emotion Classifier",
-    description:
-      "ML model classifying text into 9 emotion categories with 85% accuracy on test data. Built a full preprocessing pipeline (lowercasing, punctuation removal, n-gram tokenization) extracting 1,000+ features, boosting performance by 20%. Ships with an interactive CLI and real-time confidence scores.",
-    tags: ["Python", "scikit-learn", "TF-IDF", "Logistic Regression"],
-    github: "https://github.com/LangstonW430/Sentence-Tone-Classifier",
-    live: null,
-    date: "2025",
-  },
-];
+import { client } from "./sanity/client";
+import { allProjectsQuery } from "./sanity/queries";
+import type { Project } from "./sanity/types";
 
 export default function ProjectsPage() {
+  const [projects, setProjects] = useState<Project[]>([]);
+
   useEffect(() => {
     window.scrollTo(0, 0);
+  }, []);
+
+  useEffect(() => {
+    client.fetch<Project[]>(allProjectsQuery).then(setProjects);
+  }, []);
+
+  useEffect(() => {
     const reveals = document.querySelectorAll(".reveal");
     const observer = new IntersectionObserver(
       (entries) => {
@@ -99,7 +31,7 @@ export default function ProjectsPage() {
     );
     reveals.forEach((el) => observer.observe(el));
     return () => observer.disconnect();
-  }, []);
+  }, [projects]);
 
   return (
     <>
@@ -133,7 +65,7 @@ export default function ProjectsPage() {
 
         <div className="all-projects-list">
           {projects.map((p) => (
-            <div key={p.num} className="ap-card reveal">
+            <div key={p._id} className="ap-card reveal">
               <div className="ap-num">{p.num}</div>
               <div className="ap-body">
                 <div className="ap-top">

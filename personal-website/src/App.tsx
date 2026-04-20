@@ -1,11 +1,22 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { Analytics } from "@vercel/analytics/react";
 import headshotImg from "./assets/Enhanced Headshot.jpg";
 import resumePDF from "./assets/CS_Resume.pdf";
 import "./App.css";
+import { client } from "./sanity/client";
+import { featuredProjectsQuery, workingOnQuery } from "./sanity/queries";
+import type { Project } from "./sanity/types";
 
 function App() {
+  const [featuredProjects, setFeaturedProjects] = useState<Project[]>([]);
+  const [workingOnProjects, setWorkingOnProjects] = useState<Project[]>([]);
+
+  useEffect(() => {
+    client.fetch<Project[]>(featuredProjectsQuery).then(setFeaturedProjects);
+    client.fetch<Project[]>(workingOnQuery).then(setWorkingOnProjects);
+  }, []);
+
   useEffect(() => {
     const reveals = document.querySelectorAll(".reveal");
     const observer = new IntersectionObserver(
@@ -21,7 +32,7 @@ function App() {
     );
     reveals.forEach((el) => observer.observe(el));
     return () => observer.disconnect();
-  }, []);
+  }, [featuredProjects, workingOnProjects]);
 
   return (
     <>
@@ -188,74 +199,55 @@ function App() {
         <div className="section-label">Projects</div>
 
         <div className="projects-grid">
-          <div className="project-card reveal">
-            <div className="project-num">01</div>
-            <div className="project-tags">
-              <span className="tag">TypeScript</span>
-              <span className="tag">React</span>
-              <span className="tag">PostgreSQL</span>
-              <span className="tag">Next.js</span>
-              <span className="tag">CSS</span>
-            </div>
-            <h3>
-              <a href="https://exbo.site" target="_blank" rel="noopener">
-                Exbo - Community Forum Website
-              </a>
-            </h3>
-            <p>
-              A full-stack web application built with Next.js and TypeScript,
-              featuring user authentication, real-time discussion threads, and
-              community engagement tools. Includes account creation, posting
-              capabilities, and a responsive design for seamless user
-              experience. Backend powered by PostgreSQL for data persistence.
-            </p>
-            <div className="project-links">
-              <a
-                href="https://github.com/LangstonW430/Forum/tree/main/forum"
-                className="btn"
-                target="_blank"
-                rel="noopener"
-              >
-                <span>View Code</span>
-              </a>
-              <a
-                href="https://exbo.site"
-                className="btn"
-                target="_blank"
-                rel="noopener"
-              >
-                <span>View Live Site</span>
-              </a>
-            </div>
-            <div className="project-date">2025</div>
-          </div>
-
-          <div className="project-card reveal">
-            <div className="project-num">02</div>
-            <div className="project-tags">
-              <span className="tag">Python</span>
-              <span className="tag">scikit-learn</span>
-              <span className="tag">TF-IDF</span>
-              <span className="tag">Logistic Regression</span>
-            </div>
-            <h3>
-              <a
-                href="https://github.com/LangstonW430/Sentence-Tone-Classifier"
-                target="_blank"
-                rel="noopener"
-              >
-                Sentence Tone / Emotion Classifier
-              </a>
-            </h3>
-            <p>
-              ML model classifying text into 9 emotion categories with 85%
-              accuracy on test data. Built a full preprocessing pipeline
-              (lowercasing, punctuation removal, n-gram tokenization) extracting
-              1,000+ features, boosting performance by 20%. Ships with an
-              interactive CLI and real-time confidence scores.
-            </p>
-            <div className="project-date">Dec 2025</div>
-          </div>
+          {featuredProjects.map((p, i) => {
+            const codeHref = p.featuredGithub || p.github;
+            const displayNum = (i + 1).toString().padStart(2, "0");
+            return (
+              <div key={p._id} className="project-card reveal">
+                <div className="project-num">{displayNum}</div>
+                <div className="project-tags">
+                  {p.tags.map((t) => (
+                    <span key={t} className="tag">
+                      {t}
+                    </span>
+                  ))}
+                </div>
+                <h3>
+                  <a
+                    href={p.live || codeHref}
+                    target="_blank"
+                    rel="noopener"
+                  >
+                    {p.title} — {p.subtitle}
+                  </a>
+                </h3>
+                <p>{p.description}</p>
+                <div className="project-links">
+                  {codeHref && (
+                    <a
+                      href={codeHref}
+                      className="btn"
+                      target="_blank"
+                      rel="noopener"
+                    >
+                      <span>View Code</span>
+                    </a>
+                  )}
+                  {p.live && (
+                    <a
+                      href={p.live}
+                      className="btn"
+                      target="_blank"
+                      rel="noopener"
+                    >
+                      <span>View Live Site</span>
+                    </a>
+                  )}
+                </div>
+                <div className="project-date">{p.date}</div>
+              </div>
+            );
+          })}
         </div>
         <div className="projects-cta reveal">
           <Link to="/projects" className="btn btn-outline-cream">
@@ -269,34 +261,46 @@ function App() {
         <div className="section-label">What I'm Working On</div>
 
         <div className="projects-grid reveal">
-          <div className="project-card">
-            <div className="project-num">01</div>
-            <div className="project-tags">
-              <span className="tag">TypeScript</span>
-              <span className="tag">Next.js</span>
-              <span className="tag">Convex</span>
-              <span className="tag">TipTap</span>
-              <span className="tag">Tailwind CSS</span>
-            </div>
-            <h3>CollabDocs</h3>
-            <p>
-              A real-time collaborative document editor where multiple users can
-              work simultaneously on shared documents. Built with Next.js 15 and
-              TypeScript, powered by Convex for live data sync and
-              authentication, with a rich editing experience via TipTap.
-            </p>
-            <div className="project-links">
-              <a
-                href="https://github.com/LangstonW430/collaboration-app"
-                className="btn"
-                target="_blank"
-                rel="noopener"
-              >
-                <span>View Code</span>
-              </a>
-            </div>
-            <div className="project-date">Ongoing</div>
-          </div>
+          {workingOnProjects.map((p, i) => {
+            const displayNum = (i + 1).toString().padStart(2, "0");
+            return (
+              <div key={p._id} className="project-card">
+                <div className="project-num">{displayNum}</div>
+                <div className="project-tags">
+                  {p.tags.map((t) => (
+                    <span key={t} className="tag">
+                      {t}
+                    </span>
+                  ))}
+                </div>
+                <h3>{p.title}</h3>
+                <p>{p.description}</p>
+                <div className="project-links">
+                  {p.github && (
+                    <a
+                      href={p.github}
+                      className="btn"
+                      target="_blank"
+                      rel="noopener"
+                    >
+                      <span>View Code</span>
+                    </a>
+                  )}
+                  {p.live && (
+                    <a
+                      href={p.live}
+                      className="btn"
+                      target="_blank"
+                      rel="noopener"
+                    >
+                      <span>View Live Site</span>
+                    </a>
+                  )}
+                </div>
+                <div className="project-date">{p.date}</div>
+              </div>
+            );
+          })}
         </div>
       </section>
 
