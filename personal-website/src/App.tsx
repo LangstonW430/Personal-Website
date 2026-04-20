@@ -513,8 +513,8 @@ function App() {
             <span>Resume</span>
           </a>
         </div>
-        <a href="mailto:langstonw430@gmail.com" className="contact-email">
-          langstonw430@gmail.com · 585-626-8038
+        <a href={`mailto:${import.meta.env.VITE_CONTACT_EMAIL}`} className="contact-email">
+          {import.meta.env.VITE_CONTACT_EMAIL} · {import.meta.env.VITE_CONTACT_PHONE}
         </a>
       </section>
 
