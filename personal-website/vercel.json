@@ -3,6 +3,10 @@
     {
       "source": "/music-tracker/:path*",
       "destination": "https://music-tracker-zeta.vercel.app/:path*"
+    },
+    {
+      "source": "/((?!music-tracker).*)",
+      "destination": "/index.html"
     }
   ]
 }
