@@ -1,5 +1,5 @@
-import { useState } from "react";
-import { useReveal } from "./hooks/useReveal";
+import { useEffect, useState } from "react";
+import { Reveal } from "./components/Reveal";
 import { Link } from "react-router-dom";
 import { Analytics } from "@vercel/analytics/react";
 import headshotImg from "./assets/Enhanced Headshot.jpg";
@@ -27,8 +27,6 @@ function App() {
       .catch(() => setError(true))
       .finally(() => setLoading(false));
   }, []);
-
-  useReveal([featuredProjects, workingOnProjects]);
 
   return (
     <>
@@ -96,7 +94,7 @@ function App() {
 
       {/* ABOUT */}
       <section id="about">
-        <div className="about-text reveal">
+        <Reveal className="about-text">
           <div className="section-label">About Me</div>
           <h2>Turning ideas into working software</h2>
           <p>
@@ -116,9 +114,9 @@ function App() {
             believe great engineers understand the human context of what they
             build.
           </p>
-        </div>
+        </Reveal>
 
-        <div className="stat-grid reveal">
+        <Reveal className="stat-grid">
           <div className="stat-box">
             <div className="stat-num">3.5</div>
             <div className="stat-label">Current GPA</div>
@@ -127,7 +125,7 @@ function App() {
             <div className="stat-num">2029</div>
             <div className="stat-label">Graduating Class</div>
           </div>
-        </div>
+        </Reveal>
       </section>
 
       {/* EXPERIENCE */}
@@ -135,7 +133,7 @@ function App() {
         <div className="section-label">Experience</div>
 
         <div className="exp-list">
-          <div className="exp-item reveal">
+          <Reveal className="exp-item">
             <div className="exp-meta">
               <span className="exp-date">Jun 2024 – Aug 2024</span>
               <span className="exp-org">Workers United</span>
@@ -157,9 +155,9 @@ function App() {
                 </li>
               </ul>
             </div>
-          </div>
+          </Reveal>
 
-          <div className="exp-item reveal">
+          <Reveal className="exp-item">
             <div className="exp-meta">
               <span className="exp-date">Jun 2022 – Present</span>
               <span className="exp-org">Vertus High School</span>
@@ -186,7 +184,7 @@ function App() {
                 </li>
               </ul>
             </div>
-          </div>
+          </Reveal>
         </div>
       </section>
 
@@ -201,7 +199,7 @@ function App() {
             const codeHref = p.featuredGithub || p.github;
             const displayNum = (i + 1).toString().padStart(2, "0");
             return (
-              <div key={p._id} className="project-card reveal">
+              <Reveal key={p._id} className="project-card" delay={i * 80}>
                 <div className="project-num">{displayNum}</div>
                 <div className="project-tags">
                   {p.tags.map((t) => (
@@ -243,22 +241,22 @@ function App() {
                   )}
                 </div>
                 <div className="project-date">{p.date}</div>
-              </div>
+              </Reveal>
             );
           })}
         </div>
-        <div className="projects-cta reveal">
+        <Reveal className="projects-cta">
           <Link to="/projects" className="btn btn-outline-cream">
             <span>View All Projects</span>
           </Link>
-        </div>
+        </Reveal>
       </section>
 
       {/* WHAT I'M WORKING ON */}
       <section id="working-on">
         <div className="section-label">What I'm Working On</div>
 
-        <div className="projects-grid reveal">
+        <Reveal className="projects-grid">
           {loading && <p className="fetch-status">Loading projects…</p>}
           {error && <p className="fetch-status fetch-error">Could not load projects. Please try again later.</p>}
           {workingOnProjects.map((p, i) => {
@@ -301,7 +299,7 @@ function App() {
               </div>
             );
           })}
-        </div>
+        </Reveal>
       </section>
 
       {/* SKILLS */}
@@ -309,15 +307,15 @@ function App() {
         <div className="section-label">Technical Skills</div>
 
         <div className="skills-layout">
-          <div className="skills-intro reveal">
+          <Reveal className="skills-intro">
             <h2>Tools &amp; Technologies</h2>
             <p>
               A growing stack built through coursework and independent projects.
               Always learning something new.
             </p>
-          </div>
+          </Reveal>
 
-          <div className="skills-grid reveal">
+          <Reveal className="skills-grid">
             <div className="skill-category">
               <h4>Languages</h4>
               <div className="skill-pills">
@@ -364,7 +362,7 @@ function App() {
                 ))}
               </div>
             </div>
-          </div>
+          </Reveal>
         </div>
       </section>
 
@@ -372,7 +370,7 @@ function App() {
       <section id="education">
         <div className="section-label">Education</div>
 
-        <div className="edu-card reveal">
+        <Reveal className="edu-card">
           <div>
             <div className="edu-degree">
               B.S. Computer Science | Artificial Intelligence Concentration
@@ -404,14 +402,14 @@ function App() {
             <span className="gpa-num">3.5</span>
             <span className="gpa-label">GPA</span>
           </div>
-        </div>
+        </Reveal>
       </section>
 
       {/* HIRE ME */}
       <section id="hire">
         <div className="section-label">Freelance Work</div>
         <div className="hire-layout">
-          <div className="hire-intro reveal">
+          <Reveal className="hire-intro">
             <h2>
               Let's build
               <br />
@@ -435,9 +433,9 @@ function App() {
                 <span>View Services</span>
               </a>
             </div>
-          </div>
+          </Reveal>
 
-          <div className="hire-services reveal">
+          <Reveal className="hire-services">
             <div className="service-item">
               <div className="service-icon">01</div>
               <div className="service-body">
@@ -476,7 +474,7 @@ function App() {
                 </p>
               </div>
             </div>
-          </div>
+          </Reveal>
         </div>
       </section>
 

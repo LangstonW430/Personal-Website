@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useReveal } from "./hooks/useReveal";
+import { Reveal } from "./components/Reveal";
 import { Link } from "react-router-dom";
 import { Analytics } from "@vercel/analytics/react";
 import { client } from "./sanity/client";
@@ -23,8 +23,6 @@ export default function ProjectsPage() {
       .finally(() => setLoading(false));
   }, []);
 
-  useReveal([projects]);
-
   return (
     <>
       <nav>
@@ -45,7 +43,7 @@ export default function ProjectsPage() {
       </nav>
 
       <div className="all-projects-page">
-        <div className="all-projects-header reveal">
+        <Reveal className="all-projects-header">
           <p className="hero-eyebrow">All Projects</p>
           <h1 className="all-projects-title">
             Things I've
@@ -53,13 +51,13 @@ export default function ProjectsPage() {
             <em>built</em>
           </h1>
           <p className="all-projects-sub">A full archive of my work.</p>
-        </div>
+        </Reveal>
 
         <div className="all-projects-list">
           {loading && <p className="fetch-status">Loading projects…</p>}
           {error && <p className="fetch-status fetch-error">Could not load projects. Please try again later.</p>}
           {projects.map((p) => (
-            <div key={p._id} className="ap-card reveal">
+            <Reveal key={p._id} className="ap-card">
               <div className="ap-num">{p.num}</div>
               <div className="ap-body">
                 <div className="ap-top">
@@ -100,7 +98,7 @@ export default function ProjectsPage() {
                   <span className="ap-date">{p.date}</span>
                 </div>
               </div>
-            </div>
+            </Reveal>
           ))}
         </div>
       </div>
