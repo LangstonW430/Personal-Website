@@ -401,7 +401,7 @@ function App() {
       </section>
 
       {/* HIRE ME */}
-      {/* <section id="hire">
+      <section id="hire">
         <div className="section-label">Freelance Work</div>
         <div className="hire-layout">
           <Reveal className="hire-intro">
@@ -471,7 +471,7 @@ function App() {
             </div>
           </Reveal>
         </div>
-      </section> */}
+      </section>
 
       {/* CONTACT */}
       <section id="contact">
