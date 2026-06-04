@@ -94,7 +94,7 @@ function App() {
           <h2>Turning ideas into working software</h2>
           <p>
             I'm a first-year Computer Science student at the University of
-            Rochester with a 3.5 GPA, passionate about building tools that are
+            Rochester with a 3.6 GPA, passionate about building tools that are
             both functional and thoughtfully designed.
           </p>
           <p>
@@ -113,7 +113,7 @@ function App() {
 
         <Reveal className="stat-grid">
           <div className="stat-box">
-            <div className="stat-num">3.5</div>
+            <div className="stat-num">3.6</div>
             <div className="stat-label">Current GPA</div>
           </div>
           <div className="stat-box">
@@ -394,7 +394,7 @@ function App() {
             </div>
           </div>
           <div className="edu-gpa-block">
-            <span className="gpa-num">3.5</span>
+            <span className="gpa-num">3.6</span>
             <span className="gpa-label">GPA</span>
           </div>
         </Reveal>
