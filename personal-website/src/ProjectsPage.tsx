@@ -3,11 +3,23 @@ import { Reveal } from "./components/Reveal";
 import { Link } from "react-router-dom";
 import { Analytics } from "@vercel/analytics/react";
 import { client } from "./sanity/client";
-import { allProjectsQuery } from "./sanity/queries";
-import type { Project } from "./sanity/types";
+import {
+  allProjectsQuery,
+  projectsPageQuery,
+  siteSettingsQuery,
+} from "./sanity/queries";
+import type {
+  Project,
+  ProjectsPageContent,
+  SiteSettings,
+} from "./sanity/types";
+import { defaultProjectsPage, defaultSettings } from "./content/defaults";
+import { merge, mergeSettings } from "./content/merge";
 
 export default function ProjectsPage() {
   const [projects, setProjects] = useState<Project[]>([]);
+  const [settings, setSettings] = useState<SiteSettings>(defaultSettings);
+  const [page, setPage] = useState<ProjectsPageContent>(defaultProjectsPage);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
@@ -17,9 +29,16 @@ export default function ProjectsPage() {
   }, []);
 
   useEffect(() => {
-    client
-      .fetch<Project[]>(allProjectsQuery)
-      .then(setProjects)
+    Promise.all([
+      client.fetch<Project[]>(allProjectsQuery),
+      client.fetch<Partial<SiteSettings> | null>(siteSettingsQuery),
+      client.fetch<Partial<ProjectsPageContent> | null>(projectsPageQuery),
+    ])
+      .then(([allProjects, siteData, pageData]) => {
+        setProjects(allProjects);
+        setSettings(mergeSettings(defaultSettings, siteData));
+        setPage(merge(defaultProjectsPage, pageData));
+      })
       .catch(() => setError(true))
       .finally(() => setLoading(false));
   }, []);
@@ -28,7 +47,9 @@ export default function ProjectsPage() {
     <>
       <nav className={menuOpen ? "nav-open" : ""}>
         <Link to="/" className="nav-logo">
-          L<span>.</span>Woods
+          {settings.logoLead}
+          <span>.</span>
+          {settings.logoTail}
         </Link>
         <button
           className="nav-hamburger"
@@ -39,21 +60,23 @@ export default function ProjectsPage() {
           <span /><span /><span />
         </button>
         <ul className="nav-links" onClick={() => setMenuOpen(false)}>
-          <li><Link to="/#about">About</Link></li>
-          <li><Link to="/#projects">Projects</Link></li>
-          <li><Link to="/#contact">Contact</Link></li>
+          {settings.projectsNav.map((link) => (
+            <li key={link.href + link.label}>
+              <Link to={link.href}>{link.label}</Link>
+            </li>
+          ))}
         </ul>
       </nav>
 
       <div className="all-projects-page">
         <Reveal className="all-projects-header">
-          <p className="hero-eyebrow">All Projects</p>
+          <p className="hero-eyebrow">{page.eyebrow}</p>
           <h1 className="all-projects-title">
-            Things I've
+            {page.titleLead}
             <br />
-            <em>built</em>
+            <em>{page.titleEm}</em>
           </h1>
-          <p className="all-projects-sub">A full archive of my work.</p>
+          <p className="all-projects-sub">{page.subtitle}</p>
         </Reveal>
 
         <div className="all-projects-list">
@@ -107,8 +130,9 @@ export default function ProjectsPage() {
       </div>
 
       <footer>
-        <p>© 2026 Langston Woods</p>
-        <p>CS @ University of Rochester · Class of 2029</p>
+        {settings.footerLines.map((line, i) => (
+          <p key={i}>{line}</p>
+        ))}
       </footer>
 
       <Analytics />
