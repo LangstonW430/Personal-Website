@@ -34,6 +34,19 @@ The seed does not include the headshot or the resume PDF, since NDJSON can't
 carry binary assets. Upload those in the Studio if you want to manage them there
 (see *Fallbacks* below).
 
+### One-off imports
+
+`seed/promptdesk.ndjson` adds the PromptDesk project:
+
+```bash
+npx sanity dataset import seed/promptdesk.ndjson production --replace
+```
+
+It only touches `project-promptdesk`, so nothing else in the dataset is
+affected. Importing cannot clear a flag on *other* documents — if another
+project still has **Currently Working On** ticked, untick it in the Studio so
+PromptDesk is the only one in that section. Delete this file once it's in.
+
 ## What's in here
 
 **Singletons** — one document each, edited in place:
